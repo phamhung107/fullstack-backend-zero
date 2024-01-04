@@ -1,0 +1,27 @@
+{
+  "name": "backend-zero",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phamhung107/fullstack-backend-zero.git"
+  },
+  "keywords": [
+    "nodejs",
+    "react"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phamhung107/fullstack-backend-zero/issues"
+  },
+  "homepage": "https://github.com/phamhung107/fullstack-backend-zero#readme",
+  "dependencies": {
+    "express": "4.18.2"
+  }
+}
