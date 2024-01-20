@@ -18,17 +18,13 @@ const postCreateUser = async (req, res) => {
   let name = req.body.myname;
   let city = req.body.city;
 
-  await updateUserById(email, city, name, userId);
-
   console.log("email =", email, "name =", name, "city=", city);
 
   let [results, fields] = await connection.query(
-    `INSERT INTO Users (email, name, city)
-        VALUES (?, ?, ?);`,
+    `INSERT INTO Users (email, name, city)VALUES (?, ?, ?);`,
     [email, name, city]
   );
 
-  console.log("check result: ", results);
   res.send("create user successfully");
 };
 
