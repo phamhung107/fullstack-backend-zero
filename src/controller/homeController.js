@@ -8,7 +8,7 @@ const {
 
 const User = require("../model/user");
 const getHomepage = async (req, res) => {
-  let results = [];
+  let results = await User.find({});
   return res.render("home.ejs", { listUsers: results });
 };
 const getABC = (req, res) => {
@@ -42,7 +42,8 @@ const getCreatePage = (req, res) => {
 
 const getUpdatePage = async (req, res) => {
   const userId = req.params.id;
-  let user = await getUserById(userId);
+  // let user = await getUserById(userId);
+  let user = await User.findById(userId).exec();
   res.render("edit.ejs", { userEdit: user });
 };
 
@@ -54,7 +55,10 @@ const postUpdateUser = async (req, res) => {
 
   updateUserById(email, city, name, userId);
 
-  // res.send("updated user successfully");
+  await User.updateOne(
+    { _id: userId },
+    { email: email, name: name, city: city }
+  );
   res.redirect("/");
 };
 const postDeleteUser = async (req, res) => {
