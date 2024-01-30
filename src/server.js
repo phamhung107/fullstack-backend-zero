@@ -2,6 +2,7 @@ const express = require("express");
 require("dotenv").config();
 const configViewEngine = require("./config/viewEngine");
 const webRoutes = require("./route/web");
+const apiRoutes = require("./route/api");
 const connection = require("./config/database");
 
 const app = express();
@@ -17,6 +18,7 @@ configViewEngine(app);
 
 //khai bao route
 app.use("/", webRoutes);
+app.use("/v1/api", apiRoutes);
 
 (async () => {
   try {
