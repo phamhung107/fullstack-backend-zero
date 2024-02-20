@@ -3,11 +3,16 @@ require("dotenv").config();
 const configViewEngine = require("./config/viewEngine");
 const webRoutes = require("./route/web");
 const apiRoutes = require("./route/api");
+const fileUpload = require("express-fileupload");
+
 const connection = require("./config/database");
 
 const app = express();
 const port = process.env.PORT;
 const hostname = process.env.HOST_NAME;
+
+//config file upload
+app.use(fileUpload());
 
 //congif req.body
 app.use(express.urlencoded({ extended: true }));
