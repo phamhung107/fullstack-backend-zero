@@ -2,11 +2,17 @@ const express = require("express");
 require("dotenv").config();
 const configViewEngine = require("./config/viewEngine");
 const webRoutes = require("./route/web");
+const apiRoutes = require("./route/api");
+const fileUpload = require("express-fileupload");
+
 const connection = require("./config/database");
 
 const app = express();
 const port = process.env.PORT;
 const hostname = process.env.HOST_NAME;
+
+//config file upload
+app.use(fileUpload());
 
 //congif req.body
 app.use(express.urlencoded({ extended: true }));
@@ -17,12 +23,15 @@ configViewEngine(app);
 
 //khai bao route
 app.use("/", webRoutes);
+app.use("/v1/api", apiRoutes);
 
-// test connection
-
-// simple query
-// connection.query("SELECT * FROM Users u;", function (err, results, fields) {});
-
-app.listen(port, hostname, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+(async () => {
+  try {
+    await connection();
+    app.listen(port, hostname, () => {
+      console.log(`Backend zero app listening on port ${port}`);
+    });
+  } catch (error) {
+    console.log("Error connect to DB", error);
+  }
+})();
